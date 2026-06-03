@@ -14,9 +14,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
       - name: Print release number
         run: echo "Release is ${{ inputs.relno }}"
        
+      - name: List all files
+        run: ls -R
+
    
 
 
