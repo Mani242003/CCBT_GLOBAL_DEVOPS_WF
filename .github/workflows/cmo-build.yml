@@ -24,7 +24,7 @@ jobs:
        
       - name: Checkout App Code
         run: |
-          cd /e/cmosh/sh
+          cd /temp/cmosh/sh
           ./checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
 
    
