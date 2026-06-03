@@ -16,17 +16,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
+      
       - name: Print release number
         run: echo "Release is ${{ inputs.relno }}"
-       
+      - name: Get ACTION repo
+        uses: actions/checkout@v3
+        with:
+          repository: Mani242003/CCBT_GLOBAL_DEVOPS_ACTION
+          path: action-repo
       - name: Checkout App Code
         run: |
-          cd /temp/cmosh/sh
-          ./checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
-
+          chmod +x action-repo/checkoutcode-mcmo.sh
+          ./action-repo/checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
    
 
 
