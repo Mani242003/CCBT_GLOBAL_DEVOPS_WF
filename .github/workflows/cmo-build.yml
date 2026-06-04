@@ -28,8 +28,8 @@ jobs:
         run: ls -R
       - name: Checkout App Code
         run: |
-          chmod +x action-repo/checkoutcode-mcmo.sh
-          ./action-repo/checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
+          chmod +x action-repo/sh/checkoutcode-mcmo.sh
+          ./action-repo/sh/checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
    
 
 
