@@ -16,7 +16,7 @@ jobs:
       - name: Checkout YAML Repo
         uses: actions/checkout@v4
         with:
-          repository: your-username/CCBT_GLOBAL_DEVOPS_CODES
+          repository: Mani242003/CCBT_GLOBAL_DEVOPS_CODES
           path: codes
 
       - name: Setup Kubernetes
