@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment: { type: string, required: true }
+      projectName: { type: string, required: true }
+      selectpackage: { type: string, required: true }
+      selectall: { type: string, required: true }
+      runner: { type: string, required: true }
+
+jobs:
+  deploy:
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - name: Checkout YAML Repo
+        uses: actions/checkout@v4
+        with:
+          repository: your-username/CCBT_GLOBAL_DEVOPS_CODES
+          path: codes
+
+      - name: Setup Kubernetes
+        run: kubectl config use-context minikube
+
+      - name: Deploy ConfigMap
+        run: kubectl apply -f codes/properties/configMap.yaml
+
+      - name: Deploy Secret
+        run: kubectl apply -f codes/properties/secret.yaml
+
+      - name: Deploy App
+        run: kubectl apply -f codes/applications/cmo-backendapp/deployment.yaml
