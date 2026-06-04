@@ -1,36 +1,35 @@
-name: CMO Build Workflow
+name: CMO Mobile - Build
 
 on:
   workflow_call:
     inputs:
-      relno:
-        type: string
-        required: true
-      branchName:   
-        required: true
-        type: string
-
+      relordev: { type: string, required: true }
+      relno: { type: string, required: true }
+      branchName: { type: string, required: true }
+      buildimage: { type: string, required: true }
+      uploadimage: { type: string, required: true }
+      environment: { type: string, required: true }
+      runner: { type: string, required: true }
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ inputs.runner }}
     steps:
-      
-      - name: Print release number
-        run: echo "Release is ${{ inputs.relno }}"
-      - name: Get ACTION repo
-        uses: actions/checkout@v3
+      - name: Checkout App Code
+        uses: actions/checkout@v4
+
+      - name: Checkout Scripts Repo
+        uses: actions/checkout@v4
         with:
           repository: Mani242003/CCBT_GLOBAL_DEVOPS_ACTION
-          path: action-repo
-      - name: Show all files
-        run: ls -R
-      - name: Checkout App Code
+          path: scripts
+
+      - name: Build JAR
         run: |
-          chmod +x action-repo/sh/checkoutcode-mcmo.sh
-          ./action-repo/sh/checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
-   
+          chmod +x scripts/sh/buildjar-mcmo.sh
+          scripts/sh/buildjar-mcmo.sh
 
-
-    
+      - name: Build & Push Docker Image
+        run: |
+          chmod +x scripts/sh/buildimage-mcmo.sh
+          scripts/sh/buildimage-mcmo.sh ${{ inputs.relno }}
