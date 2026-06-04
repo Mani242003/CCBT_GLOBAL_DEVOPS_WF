@@ -28,6 +28,8 @@ jobs:
         run: |
           chmod +x action-repo/checkoutcode-mcmo.sh
           ./action-repo/checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
+      - name: Show all files
+        run: ls -R
    
 
 
