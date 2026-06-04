@@ -24,12 +24,12 @@ jobs:
         with:
           repository: Mani242003/CCBT_GLOBAL_DEVOPS_ACTION
           path: action-repo
+      - name: Show all files
+        run: ls -R
       - name: Checkout App Code
         run: |
           chmod +x action-repo/checkoutcode-mcmo.sh
           ./action-repo/checkoutcode-mcmo.sh "${{ inputs.branchName }}" "${{ secrets.GIT_TOKEN }}"
-      - name: Show all files
-        run: ls -R
    
 
 
